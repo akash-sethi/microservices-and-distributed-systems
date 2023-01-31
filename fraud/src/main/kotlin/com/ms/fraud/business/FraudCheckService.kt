@@ -1,8 +1,8 @@
 package com.ms.fraud.business
 
+import com.ms.client.fraudcheck.CustomerCheckResponse
 import com.ms.fraud.domain.FraudCheckHistory
-import com.ms.fraud.dto.FraudCheckResponse
-import com.ms.fraud.dto.toDTO
+import com.ms.fraud.utils.toDTO
 import com.ms.fraud.repository.FraudCheckRepository
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
@@ -16,7 +16,7 @@ class FraudCheckService(
 ) {
     private val logger by lazy { LoggerFactory.getLogger(javaClass) }
 
-    fun isFraudulentCustomer(customerId: Int): FraudCheckResponse {
+    fun isFraudulentCustomer(customerId: Int): CustomerCheckResponse {
         logger.info("isFraudulentCustomer => customerId = $customerId")
         //todo check from third party or internal implementation and save the history
         val isFraudster = false

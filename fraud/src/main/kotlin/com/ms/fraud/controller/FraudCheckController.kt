@@ -1,7 +1,7 @@
 package com.ms.fraud.controller
 
+import com.ms.client.fraudcheck.CustomerCheckResponse
 import com.ms.fraud.business.FraudCheckService
-import com.ms.fraud.dto.FraudCheckResponse
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -16,7 +16,7 @@ class FraudCheckController(
     private val logger by lazy { LoggerFactory.getLogger(javaClass) }
 
     @GetMapping(path = ["{customerId}"])
-    fun isFraudster(@PathVariable customerId: Int): FraudCheckResponse {
+    fun isFraudster(@PathVariable customerId: Int): CustomerCheckResponse {
         logger.info("isFraudster => customerId = $customerId")
         return fraudCheckService.isFraudulentCustomer(customerId)
     }
