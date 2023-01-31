@@ -23,7 +23,7 @@ class CustomerService(
         val customer = customerRepository.saveAndFlush(customerDTO.toCustomer())
         //basic communication between two microservice
         val isFraudulentCustomer = restTemplate.getForObject(
-            "http://localhost:8081/api/v1/fraud-check/{customerId}",
+            "http://FRAUD-CHECK/api/v1/fraud-check/{customerId}", //todo needs to externalize, keeping here for demo purpose
             FraudCheckResponse::class.java,
             customer.id
         )?.isFraudulentCustomer
