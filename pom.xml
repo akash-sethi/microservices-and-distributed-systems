@@ -9,6 +9,7 @@
         <module>eureka-server</module>
         <module>client</module>
         <module>gateway</module>
+        <module>notification</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

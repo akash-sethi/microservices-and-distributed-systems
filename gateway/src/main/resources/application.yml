@@ -18,6 +18,10 @@ spring:
           uri: lb://CUSTOMER
           predicates:
             - Path=/api/v1/customers/**
+        - id: customer
+          uri: lb://NOTIFICATION
+          predicates:
+            - Path=/api/v1/notifications/**
 eureka:
   client:
     fetch-registry: true
