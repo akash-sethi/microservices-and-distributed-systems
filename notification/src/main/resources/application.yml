@@ -1,3 +1,10 @@
+logging:
+  level:
+    ROOT: warn
+    com.ms: debug
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+
 server:
   port: 8082
 
@@ -16,6 +23,8 @@ spring:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
+  rabbitmq:
+    addresses: localhost:5672
 
 eureka:
   client:
@@ -28,3 +37,8 @@ management:
   tracing:
     sampling:
       probability: 1.0
+
+rabbitmq:
+  internalExchange: internal.exchange
+  notificationQueue: notification.queue
+  internalNotificationRoutingKey: internal.notification.routing-key

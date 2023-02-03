@@ -1,7 +1,7 @@
 package com.ms.customer.business
 
+import com.ms.amqp.MessageProducer
 import com.ms.client.fraudcheck.CustomerCheckClient
-import com.ms.client.notification.NotificationClient
 import com.ms.customer.dto.CustomerDTO
 import com.ms.customer.dto.toCustomer
 import com.ms.customer.dto.toNotificationRequest
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional
 class CustomerService(
     val customerRepository: CustomerRepository,
     val customerCheckClient: CustomerCheckClient,
-    val notificationClient: NotificationClient
+    val messageProducer: MessageProducer
 ) {
     private val logger by lazy { LoggerFactory.getLogger(javaClass) }
 
@@ -37,6 +37,6 @@ class CustomerService(
 
         val requestDTO = customer.toNotificationRequest(MESSAGE)
         logger.info("Sending async notification request = $requestDTO")
-        notificationClient.sendNotification(requestDTO)
+        messageProducer.publish(requestDTO, "internal.exchange", "internal.notification.routing-key")
     }
 }
